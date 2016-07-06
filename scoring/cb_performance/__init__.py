@@ -3,6 +3,7 @@
 """
 
 import logging
+from ..perf_constants import *
 
 l = logging.getLogger("patch_reputation.cb_performance")
 
@@ -118,10 +119,7 @@ def get_perf_totals(perf_json_list):
     :param perf_json_list: list of jsons (or dictionaries) of all performance values.
     :return: Dictionary containing totals of all perf counters.
     """
-    RSS_PERF_NAME = "rss"
-    FLT_PERF_NAME = "flt"
-    CPU_CLOCK_PERF_NAME = "cpu_clock"
-    TSK_CLOCK_PERF_NAME = "task_clock"
+
     to_ret = {RSS_PERF_NAME: 0.0, FLT_PERF_NAME: 0.0,
               CPU_CLOCK_PERF_NAME: 0.0, TSK_CLOCK_PERF_NAME: 0.0}
     perf_keys = [RSS_PERF_NAME, FLT_PERF_NAME, CPU_CLOCK_PERF_NAME, TSK_CLOCK_PERF_NAME]
