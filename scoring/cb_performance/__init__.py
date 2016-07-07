@@ -1,9 +1,10 @@
 """
-
+Has methods that compute performance of patched cbs against polls that have been run.
 """
 
 import logging
 from ..perf_constants import *
+from farnsworth.models import CbPollPerformance
 
 l = logging.getLogger("patch_reputation.cb_performance")
 
@@ -24,10 +25,8 @@ def get_all_cb_sets_perf(target_cs, min_polls_tested=25):
     to_ret = {}
     # Here we get all performance objects that belong to a CB
     # whose cs is same as the provided CS.
-    # TODO: Complete this
-    # TODO: also, consider only those binaries for which certain number of polls have been tested.
     l.info("Trying to get perf objects from DB.")
-    raw_perf_objs = []
+    raw_perf_objs = CbPollPerformance.select().where(CbPollPerformance.cs == target_cs)
     l.info("Got :" + str(len(raw_perf_objs)) + " perf objects from DB.")
 
     l.info("Trying to get polls which every patched binary have been tested.")
@@ -35,8 +34,9 @@ def get_all_cb_sets_perf(target_cs, min_polls_tested=25):
     # get patched binary set, poll id, perf object dict
     cb_set_perf_dict = {}
     for curr_perf_obj in raw_perf_objs:
-        # TODO: Change this to patched binary set
         curr_patch_type = curr_perf_obj.patch_type
+        if curr_patch_type is None:
+            curr_patch_type = 'original'
         if curr_patch_type not in cb_set_perf_dict:
             cb_set_perf_dict[curr_patch_type] = {}
         cb_set_perf_dict[curr_patch_type][curr_perf_obj.poll.id] = curr_perf_obj
