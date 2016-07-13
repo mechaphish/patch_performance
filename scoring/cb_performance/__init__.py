@@ -6,7 +6,7 @@ import logging
 from ..perf_constants import *
 from farnsworth.models import CbPollPerformance
 
-l = logging.getLogger("patch_reputation.cb_performance")
+l = logging.getLogger("patch_performance.cb_performance")
 
 
 def get_all_cb_sets_perf(target_cs, min_polls_tested=25):

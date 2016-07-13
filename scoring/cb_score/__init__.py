@@ -81,5 +81,5 @@ def compute_overhead(unpatched_perf, patched_perf):
         else:
             to_ret[FILE_SIZE_OVER_HEAD_KEY] = float(rep_file_size)
 
-    return {'score': to_ret}
+    return {'score': {'cfe_ratio': to_ret, 'ref': unpatched_perf, 'rep': patched_perf}}
 

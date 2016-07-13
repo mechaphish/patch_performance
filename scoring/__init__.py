@@ -5,7 +5,7 @@ from perf_constants import SIZE_PERF_NAME
 from farnsworth.models import PatchScore, Round
 import logging
 
-l = logging.getLogger("patch_reputation.main")
+l = logging.getLogger("patch_performance.main")
 
 
 def compute_patch_reputation(target_cs):
