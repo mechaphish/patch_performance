@@ -1,10 +1,10 @@
 from distutils.core import setup
 
 setup(
-      name='network_poll_creator',
+      name='patch_performance',
       version='0.01',
-      packages=['network_poll_creator'],
+      packages=['patch_performance'],
       install_requires=[i.strip() for i in open('requirements.txt').readlines() if 'git' not in i],
-      description='Creates raw polls (XMLs) from captured raw round traffic.',
-      url='https://git.seclab.cs.ucsb.edu/cgc/network_poll_creator',
+      description='A Component that computes scores of all patched binaries and updates DB with corresponding scores.',
+      url='https://git.seclab.cs.ucsb.edu/cgc/patch_performance',
 )
