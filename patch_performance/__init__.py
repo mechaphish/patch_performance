@@ -26,8 +26,8 @@ def compute_patch_performance(target_cs):
     original_cbs_perf = []
     if 'original' in grouped_perf_results:
         original_cbs_perf = grouped_perf_results['original']
-    del grouped_perf_results['original']
-    if len(original_cbs_perf) > 0:
+        del grouped_perf_results['original']
+    if len(original_cbs_perf) <= 0:
         l.warning("No polls have been evaluated against original binary. "
                   "Ignoring this round of patch performance computation.")
         return
@@ -39,7 +39,7 @@ def compute_patch_performance(target_cs):
     original_cbs_perf = original_cbs_perf['pass']
 
     for curr_patch_type in grouped_perf_results:
-        l.log("Computing Scores for Patch Type:" + str(curr_patch_type))
+        l.info("Computing Scores for Patch Type:" + str(curr_patch_type))
         pass_perf_objects = grouped_perf_results[curr_patch_type]['pass']
         patched_cbs_pass_poll_ids = []
         if len(pass_perf_objects) > 0:
@@ -54,7 +54,7 @@ def compute_patch_performance(target_cs):
         failed_polls = []
         if has_fails:
             failed_polls = map(lambda perf_obj: perf_obj.poll.id, failed_perf_objects)
-        failed_polls_json = {'poll_ids': failed_polls}
+        failed_polls_json = {'poll_ids': list(failed_polls)}
 
         original_cbs_pass_poll_ids = map(lambda perf_obj: perf_obj.poll.id, original_cbs_perf)
 
@@ -67,7 +67,7 @@ def compute_patch_performance(target_cs):
             # skip to next patch type
             continue
 
-        polls_included = {'poll_ids': common_pass_poll_ids}
+        polls_included = {'poll_ids': list(common_pass_poll_ids)}
 
         base_perf_objects = filter(lambda perf_obj: perf_obj.poll.id in common_pass_poll_ids, original_cbs_perf)
         patched_perf_objects = filter(lambda perf_obj: perf_obj.poll.id in common_pass_poll_ids, pass_perf_objects)
