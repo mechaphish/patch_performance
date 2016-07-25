@@ -2,7 +2,7 @@
 from cb_performance import get_all_cb_sets_perf, group_poll_results, get_perf_totals
 from cb_score import compute_overhead
 from perf_constants import SIZE_PERF_NAME
-from farnsworth.models import PatchScore, Round
+from farnsworth.models import PatchScore, Round, PatchType
 import logging
 
 l = logging.getLogger("patch_performance.main")
@@ -86,7 +86,8 @@ def compute_patch_performance(target_cs):
 
         l.info("Trying to create PatchScore into DB for patch type:" + str(curr_patch_type) + " for cs:" +
                str(target_cs.id))
-
+        # convert patch type name to PatchType
+        curr_patch_type = PatchType.get(PatchType.name == curr_patch_type)
         # create patch score
         PatchScore.create(cs=target_cs, patch_type=curr_patch_type, num_polls=len(common_pass_poll_ids),
                           polls_included=polls_included, has_failed_polls=has_fails, failed_polls=failed_polls_json,

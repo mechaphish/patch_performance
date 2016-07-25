@@ -37,6 +37,8 @@ def get_all_cb_sets_perf(target_cs, min_polls_tested=25):
         curr_patch_type = curr_perf_obj.patch_type
         if curr_patch_type is None:
             curr_patch_type = 'original'
+        else:
+            curr_patch_type = curr_patch_type.name
         if curr_patch_type not in cb_set_perf_dict:
             cb_set_perf_dict[curr_patch_type] = {}
         cb_set_perf_dict[curr_patch_type][curr_perf_obj.poll.id] = curr_perf_obj
