@@ -5,5 +5,5 @@ setup(
       version='0.01',
       packages=['patch_performance'],
       description='A Component that computes scores of all patched binaries and updates DB with corresponding scores.',
-      url='https://git.seclab.cs.ucsb.edu/cgc/patch_performance',
+      url='https://github.com/mechaphish/patch_performance',
 )
